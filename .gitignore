@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 *.txt
 *.conf
+*.cfg
+config.py
