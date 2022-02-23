@@ -29,7 +29,8 @@
   <script>
     var map = L.map("map").setView([52.0795, -354.89], 7);
 
-    L.tileLayer("http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg", 
+    //stamen.com/terrain.......jpg
+    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
     {
       maxZoom: 18,
     }).addTo(map);
