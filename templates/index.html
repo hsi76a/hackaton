@@ -1,12 +1,60 @@
-{% extends "layout.html" %}
+
+
 {% block content %}
+<!DOCTYPE html>
+<head>
+  <link
+    rel="stylesheet"
+    href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"
+  />
+  <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+  <style>
 
-    <style> 
-        h1 {text-align: center;}
-        p {text-align: center;} 
-        div {text-align: center;}
-    </style>
+    #map 
+    {
+      position: relative;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
 
-    <h1>Welcome!</h1>
+  </style>
+</head>
+<body>
+    <h1 id="latlong">
+    </h1>
+  <div id="map" style="width: 450px; height: 640px"></div>
+
+  <script>
+    var map = L.map("map").setView([52.0795, -354.89], 7);
+
+    L.tileLayer("http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.jpg", 
+    {
+      maxZoom: 18,
+    }).addTo(map);
+
+    function newMarker(e) 
+    {
+      var new_mark = L.marker().setLatLng(e.latlng).addTo(map);
+      new_mark.dragging.enable();
+      new_mark.on("dblclick", function (e) 
+      {
+        map.removeLayer(e.target);
+      });
+      var lat = e.latlng.lat.toFixed(4)
+      var lng = e.latlng.lng.toFixed(4);
+      var latlong = lat.toString() + ", " + lng.toString();
+      new_mark.bindPopup(latlong);
+      document.getElementById("latlong").innerHTML = latlong;
+    }
+
+    map.on("click", newMarker);
+
+  </script>
+
+
+
+</body>
 
 {% endblock %}

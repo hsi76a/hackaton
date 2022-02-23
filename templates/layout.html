@@ -1,0 +1,47 @@
+
+<html>
+    <head>
+      <title>Weather App</title>
+         <!-- JQuery -->
+         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+         
+         <!-- DataTables-->
+         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    </head>
+    <body>
+       <nav class="navbar navbar-expand-lg navbar-light "style="background-color: #e3e3e3;">
+           <div class="container-fluid">
+             <a class="navbar-brand" href="/">Home</a>
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+             </button>
+             <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav">
+                   <li class="nav-item">
+                     <a class="nav-link" href="{{url_for('show_car')}}">test1</a>
+                   </li>
+                   <li class="nav-item">
+                     <a class="nav-link" href="{{url_for('random_cars_brand')}}">test2</a>
+                   </li>
+               </ul>
+             </div>
+             <span class="navbar-text"> 
+               <script>
+                 var now = new Date()
+                 document.write(now.toUTCString());
+               </script>
+             </span>
+           </div>
+         </nav>
+         
+         <div class="container">
+          <hr>
+           {% block content %}{% endblock %}   
+        </div>
+      
+    </body>
+   </html>
