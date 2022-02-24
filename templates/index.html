@@ -41,8 +41,8 @@
             var lng = e.latlng.lng.toFixed(4);
 
             // reken negatieve coordinaten om naar positief, anders geeft de reverse geolookup een error    
-            var latRequest = (Number(lat) < 0) ? (Number(lat) + 360).toString() : lat;
-            var lngRequest = (Number(lng) < 0) ? (Number(lng) + 360).toString() : lng;
+            var latRequest = (Number(lat) < 0) ? (Number(lat) + 360).toFixed(4).toString() : lat;
+            var lngRequest = (Number(lng) < 0) ? (Number(lng) + 360).toFixed(4).toString() : lng;
             
             //reverse geolookup request string
             var url = "http://api.openweathermap.org/geo/1.0/reverse?lat=" + latRequest + "&lon="+ lngRequest +"&limit=5&appid=fc0ee932b46a6d6f6005a759cf770937"
@@ -54,10 +54,16 @@
                 .then(data => {name = data;});
  
             // stel de vertoonbare text samen
-            var latlong = lat.toString() + ", " + lng.toString() + ": " + name[0]['name'];
+            //plaats positieve coordinaten ipv de originelen aangezien de ruwe latlong coordinaten een negatief component bev
+            //var latlong = latRequest.toString() + ", " + lngRequest.toString() + ": " + name[0]['name'];
+            var latlong = name[0]['name'];
             
             //plaats text op de pagina
             document.getElementById("latlong").innerHTML = latlong;
+            document.getElementById("inputLat").value=latRequest.toString();
+            document.getElementById("inputLng").value= lngRequest.toString();
+            
+
 
             //zet een marker op de kaart
             new_mark.bindPopup(latlong);
@@ -66,6 +72,18 @@
 
         map.on("click", newMarker);
     </script>
+
+        <form class="form-control" method="POST" action="/index" role="form">
+            <div class="form-group">
+                <div class="input-group">
+                    <input id="inputLat" name="lattitude" placeholder="52.0000">
+                    <input id="inputLng" name="longitude" placeholder="5.1100"> 
+                </div>
+                <br>
+                <button class="btn btn-success" type="submit"> SEARCH</button>
+            </div>
+        </form>
+    
 </body>
 
 {% endblock %}
