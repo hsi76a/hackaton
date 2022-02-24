@@ -62,6 +62,8 @@
             document.getElementById("latlong").innerHTML = latlong;
             document.getElementById("inputLat").value=latRequest.toString();
             document.getElementById("inputLng").value= lngRequest.toString();
+            document.getElementById("inputplaats").value= name[0]['name'].toString();
+
             
 
 
@@ -78,12 +80,35 @@
                 <div class="input-group">
                     <input id="inputLat" name="lattitude" placeholder="52.0000">
                     <input id="inputLng" name="longitude" placeholder="5.1100"> 
+                    <input id="inputplaats" name="plaatsnaam" placeholder="Utrecht"> 
                 </div>
                 <br>
                 <button class="btn btn-success" type="submit"> SEARCH</button>
             </div>
         </form>
     
+    {% if weer_lijst is defined %}
+
+    <ul>
+        <li><b>🌡️ Temperatuur</b>: {{ weer_lijst['current']['temp'] }}</br></li>
+        <li><b>👀 Zicht</b>: {{ weer_lijst['current']['visibility'] }}</br></li>
+        <li><b>🍃 Wind Snelheid</b>: {{ weer_lijst['current']['wind_speed'] }}</br></li>
+        <li><b>🧭 Wind Richting</b>: {{ wind_richting }}</br></li>
+        <li><b>📝 Omschrijving</b>: {{ weer_lijst['current']['weather'][0]['description'] }}</li>
+    </ul>
+    </br>
+    <ul>
+        <li>{{verkeerinfo[0]}}</li>
+    </ul>
+    <ul>
+    {% for x in verkeerinfo[1] %}
+        {{x[0]}}  
+        {{x[2]}}  
+        {{x[3]}}  </br>
+    {% endfor %}
+    </ul>
+    {% else %}
+    {% endif %}
 </body>
 
 {% endblock %}
